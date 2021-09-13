@@ -1,0 +1,6 @@
+/env
+/build
+/dist
+/.hypothesis
+/.vscode
+/todo.txt
