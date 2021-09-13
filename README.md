@@ -4,8 +4,8 @@
 help you test your projects using [Redis](https://redis.io).
 
 [![Tests Status](https://github.com/klen/pytest-redislite/workflows/tests/badge.svg)](https://github.com/klen/pytest-redislite/actions)
-[![PYPI Version](https://img.shields.io/pypi/v/pytest-redislite//pypi.org/project/pytest-redislite/)
-[![Python Versions](https://img.shields.io/pypi/pyversions/pytest-redislite//pypi.org/project/pytest-redislite/)
+[![PYPI Version](https://img.shields.io/pypi/v/pytest-redislite)](https://pypi.org/project/pytest-redislite)
+[![Python Versions](https://img.shields.io/pypi/pyversions/pytest-redislite)](https://pypi.org/project/pytest-redislite)
 
 ## Features
 
