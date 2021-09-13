@@ -67,7 +67,7 @@ to change the behaviour define the fixture:
 
 ```
 
-You may define it foe a module or whole tests session.
+You may define it for a module or whole tests session.
 
 ## Bug tracker
 
