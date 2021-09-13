@@ -19,7 +19,7 @@ help you test your projects using [Redis](https://redis.io).
 
 ## Installation
 
-**pytest-redislite** should be installed using pip: ::
+**pytest-redislite** should be installed using pip:
 
     pip install pytest-redislite
 
