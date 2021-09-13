@@ -44,7 +44,7 @@ jobs:
         env/bin/pip install .[tests]
 
     - name: Test with pytest
-      run: env/bin/pytest tests
+      run: env/bin/pytest test_plugin.py
 
   notify:
     runs-on: ubuntu-latest
