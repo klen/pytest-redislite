@@ -54,6 +54,18 @@ as well as pytest `ini` options:
 - `redis_socket_path`: Specify a path to Redis Socket
 
 
+## Fixtures
+
+The plugin provides the fixtures:
+
+- `redis_server` (session scope) provides an instance of `redislite.Redis`. The
+  fixture manages the server's lifetime (start, shutdown).
+- `redis_url` (session scope) Starts redislite server and provides the server's
+  socket address.
+- `redis_factory` (session scope) a context manager to start/shutdown redislite
+  server.
+
+
 ## Auto flush data between tests
 
 By default the plugin erases all data in Redis between tests. If you would like

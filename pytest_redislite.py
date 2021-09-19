@@ -45,7 +45,7 @@ def redis_server(redis_factory):
         yield rdb
 
 
-@pytest.fixture
+@pytest.fixture(scope='session')
 def redis_url(redis_server):
     return f"unix://{redis_server.socket_file}"
 
