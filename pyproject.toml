@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "pytest-redislite"
-version = "0.2.1"
+version = "0.2.2"
 description = "Pytest plugin for testing code using Redis"
 readme = "README.md"
 license = { text = "MIT" }
@@ -53,7 +53,7 @@ target-version = "py310"
 include = ["pytest_redislite.py", "tests"]
 
 [tool.bumpversion]
-current_version = "0.2.1"
+current_version = "0.2.2"
 commit = false
 tag = false
 
