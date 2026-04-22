@@ -40,6 +40,24 @@ def test_code_with_redis(redis_url):
 The Redis server is started once per test session and cleaned up automatically
 after all tests finish.
 
+You can also use `redis_url` in your own fixtures to set up Redis-backed integrations
+(for example, a cache client or task queue broker):
+
+```python
+import pytest
+from redis import Redis
+
+@pytest.fixture(scope="session")
+def cache(redis_url):
+    client = Redis.from_url(redis_url, decode_responses=True)
+    yield client
+    client.close()
+
+def test_cache_set_and_get(cache):
+    cache.set("key", "value")
+    assert cache.get("key") == "value"
+```
+
 ## Configuration
 
 The plugin supports pytest command-line options:
