@@ -10,7 +10,7 @@ from pathlib import Path
 import pytest
 from redislite import Redis
 
-__version__ = "0.2.0"
+__version__ = "0.2.1"
 
 
 def pytest_addoption(parser):
