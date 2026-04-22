@@ -1,7 +1,7 @@
 # pytest-redislite
 
-**pytest-redislite** -- Is a simple [pytest](https://docs.pytest.org) plugin to
-help you test your projects using [Redis](https://redis.io).
+**pytest-redislite** — a simple [pytest](https://docs.pytest.org) plugin to help you test your
+projects using [Redis](https://redis.io).
 
 [![Tests Status](https://github.com/klen/pytest-redislite/workflows/tests/badge.svg)](https://github.com/klen/pytest-redislite/actions)
 [![PYPI Version](https://img.shields.io/pypi/v/pytest-redislite)](https://pypi.org/project/pytest-redislite)
@@ -9,88 +9,100 @@ help you test your projects using [Redis](https://redis.io).
 
 ## Features
 
-- Automatically starts/ends Redis for your tests using
-  [Redislite](https://github.com/yahoo/redislite)
-- Flash Redis Database between tests automatically
+- Automatically starts/ends Redis
+  for your tests using [Redislite](https://github.com/yahoo/redislite)
+- Flushes Redis database between tests automatically
+- Fast fixture teardown (bypasses slow redislite graceful shutdown)
 
 ## Requirements
 
-- python >= 3.7
+- Python >= 3.10
 
 ## Installation
 
-**pytest-redislite** should be installed using pip:
-
-    pip install pytest-redislite
+```bash
+pip install pytest-redislite
+```
 
 ## Usage
 
-When installed the plugin provides the fixture: `redis_url`
+When installed, the plugin provides the `redis_url` fixture:
 
 ```python
+def test_code_with_redis(redis_url):
+    from redis import Redis
 
-    def test_code_with_redis(redis_url):
-        from redis import Redis
-
-        redis_client = Redis.from_url(redis_url)
-        redis_client.set('key', 'value')
-        assert redis_client.get('key', 'value')
-
+    redis_client = Redis.from_url(redis_url)
+    redis_client.set("key", "value")
+    assert redis_client.get("key") == b"value"
 ```
 
-When you are using the fixture Redis server will be started and finished after
-your tests.
+The Redis server is started once per test session and cleaned up automatically
+after all tests finish.
 
 ## Configuration
 
-The plugins support pytest command line options:
+The plugin supports pytest command-line options:
 
-- `--redis-path`: Specify a path to Redis Database file
-- `--redis-socket-path`: Specify a path to Redis Socket
+- `--redis-path`: Path to the Redis database file
+- `--redis-socket-path`: Path to the Redis Unix socket
 
-as well as pytest `ini` options:
+And equivalent `pytest.ini` / `pyproject.toml` options:
 
-- `redis_path`: Specify a path to Redis Database file
-- `redis_socket_path`: Specify a path to Redis Socket
-
+- `redis_path`
+- `redis_socket_path`
 
 ## Fixtures
 
-The plugin provides the fixtures:
+| Fixture | Scope | Description |
+|---------|-------|-------------|
+| `redis_server` | session | `redislite.Redis` instance managing the server lifecycle |
+| `redis_url` | session | Unix socket URL for connecting to the running server |
+| `redis_factory` | session | Context manager to manually start/shutdown a redislite server |
 
-- `redis_server` (session scope) provides an instance of `redislite.Redis`. The
-  fixture manages the server's lifetime (start, shutdown).
-- `redis_url` (session scope) Starts redislite server and provides the server's
-  socket address.
-- `redis_factory` (session scope) a context manager to start/shutdown redislite
-  server.
+## Auto-flush data between tests
 
-
-## Auto flush data between tests
-
-By default the plugin erases all data in Redis between tests. If you would like
-to change the behaviour define the fixture:
+By default, the plugin erases all Redis data between tests.
+To disable this, override the `redis_autoflash` fixture:
 
 ```python
+import pytest
 
-    @pytest.fixture
-    def redis_autoflash():
-        return False
-
+@pytest.fixture
+def redis_autoflash():
+    return False
 ```
 
-You may define it for a module or whole tests session.
+You can scope this override to a module or the entire test session.
+
+## Development
+
+This project uses [uv](https://docs.astral.sh/uv/) for dependency management and builds.
+
+```bash
+# Install dependencies
+uv sync --group dev
+
+# Run tests
+uv run pytest tests.py
+
+# Run all tests (including no-autoflash scenario)
+uv run pytest tests.py tests_no_autoflash.py
+
+# Build and publish
+uv build
+uv publish
+```
 
 ## Bug tracker
 
-If you have any suggestions, bug reports or annoyances please report them to
-the issue tracker at https://github.com/klen/pytest-redislite/issues
-
+If you have any suggestions, bug reports,
+or annoyances please report them to the issue tracker at https:
+//github.com/klen/pytest-redislite/issues
 
 ## Contributing
 
-Development of the project happens at: https://github.com/klen/pytest-redislite
-
+Development of the project happens at: <https://github.com/klen/pytest-redislite>
 
 ## License
 

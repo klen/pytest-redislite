@@ -8,7 +8,7 @@ dynamic = ["version"]
 description = "Pytest plugin for testing code using Redis"
 readme = "README.md"
 license = { text = "MIT" }
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 authors = [{ name = "Kirill Klenov", email = "horneds@gmail.com" }]
 keywords = ["pytest", "redis", "redislite"]
 classifiers = [
@@ -17,11 +17,11 @@ classifiers = [
   "License :: OSI Approved :: MIT License",
   "Programming Language :: Python",
   "Programming Language :: Python :: 3",
-  "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
   "Topic :: Software Development :: Testing",
   "Framework :: Pytest",
 ]
@@ -46,3 +46,8 @@ addopts = "-xsv tests"
 
 [tool.pyrefly]
 project-includes = ["pytest_redislite.py", "tests.py"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+include = ["pytest_redislite.py", "tests"]
