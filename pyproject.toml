@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "pytest-redislite"
-dynamic = ["version"]
+version = "0.1.0"
 description = "Pytest plugin for testing code using Redis"
 readme = "README.md"
 license = { text = "MIT" }
@@ -28,7 +28,7 @@ classifiers = [
 dependencies = ["redislite", "pytest"]
 
 [dependency-groups]
-dev = ["redis", "types-redis", "pyrefly", "ruff", "pre-commit", "bump2version"]
+dev = ["redis", "types-redis", "pyrefly", "ruff", "pre-commit"]
 
 [project.urls]
 Documentation = "https://klen.github.io/pytest-redislite"
@@ -51,3 +51,18 @@ project-includes = ["pytest_redislite.py", "tests.py"]
 line-length = 100
 target-version = "py310"
 include = ["pytest_redislite.py", "tests"]
+
+[tool.bumpversion]
+current_version = "0.1.0"
+commit = false
+tag = false
+
+[[tool.bumpversion.files]]
+filename = "pytest_redislite.py"
+search = '__version__ = "{current_version}"'
+replace = '__version__ = "{new_version}"'
+
+[[tool.bumpversion.files]]
+filename = "pyproject.toml"
+search = 'version = "{current_version}"'
+replace = 'version = "{new_version}"'
